@@ -1,0 +1,2 @@
+# daimond
+Diamond code kata
