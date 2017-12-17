@@ -23,9 +23,17 @@ func main() {
 	fmt.Println(generateLine(letter))
 }
 
-func generateLine(letter string) string {
+func getOffset(letter string, widest string) byte {
+	return widest[0] - letter[0]
+}
+
+func getGap(letter string) int {
 	asciiDiff := int(letter[0] - asciiA)
-	gap := asciiDiff + (asciiDiff - 1)
+	return asciiDiff + (asciiDiff - 1)
+}
+
+func generateLine(letter string) string {
+	gap := getGap(letter)
 
 	if gap < 0 {
 		return letter
