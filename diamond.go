@@ -14,19 +14,17 @@ func main() {
 		panic(helpString)
 	}
 
-	letter := os.Args[1]
-	ascii := letter[0] // gets the ascii code
+	widest := os.Args[1]
+	ascii := widest[0] // gets the ascii code
 	if !(ascii >= asciiA && ascii <= asciiZ) {
 		panic(helpString)
 	}
 
 	for i := asciiA; i <= int(ascii); i++ {
-		fmt.Print(generateOffset(fmt.Sprintf("%c", i), letter))
-		fmt.Println(generateLine(fmt.Sprintf("%c", i)))
+		fmt.Println(generateLine(fmt.Sprintf("%c", i), widest))
 	}
 	for i := int(ascii - 1); i >= int(asciiA); i-- {
-		fmt.Print(generateOffset(fmt.Sprintf("%c", i), letter))
-		fmt.Println(generateLine(fmt.Sprintf("%c", i)))
+		fmt.Println(generateLine(fmt.Sprintf("%c", i), widest))
 	}
 }
 
@@ -39,23 +37,19 @@ func getGap(letter string) int {
 	return asciiDiff + (asciiDiff - 1)
 }
 
-func generateOffset(letter string, widest string) string {
+func generateLine(letter string, widest string) string {
+	gap := getGap(letter)
 	offset := getOffset(letter, widest)
 	line := ""
-	for i := 0; i <= int(offset); i++ {
+
+	for i := 0; i < int(offset); i++ {
 		line += " "
 	}
-	return line
-}
-
-func generateLine(letter string) string {
-	gap := getGap(letter)
 
 	if gap < 0 {
-		return letter
+		return line + letter
 	}
 
-	line := ""
 	line += letter
 	for i := 0; i < gap; i++ {
 		line += " "

@@ -46,7 +46,7 @@ var gaps = []testGap{
 
 func TestGenerateLine(t *testing.T) {
 	for _, test := range lines {
-		line := generateLine(test.letter)
+		line := generateLine(test.letter, test.letter)
 		if line != test.line {
 			t.Error(
 				"For", test.letter,
