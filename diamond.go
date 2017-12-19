@@ -20,7 +20,14 @@ func main() {
 		panic(helpString)
 	}
 
-	fmt.Println(generateLine(letter))
+	for i := asciiA; i <= int(ascii); i++ {
+		fmt.Print(generateOffset(fmt.Sprintf("%c", i), letter))
+		fmt.Println(generateLine(fmt.Sprintf("%c", i)))
+	}
+	for i := int(ascii - 1); i >= int(asciiA); i-- {
+		fmt.Print(generateOffset(fmt.Sprintf("%c", i), letter))
+		fmt.Println(generateLine(fmt.Sprintf("%c", i)))
+	}
 }
 
 func getOffset(letter string, widest string) byte {
@@ -30,6 +37,15 @@ func getOffset(letter string, widest string) byte {
 func getGap(letter string) int {
 	asciiDiff := int(letter[0] - asciiA)
 	return asciiDiff + (asciiDiff - 1)
+}
+
+func generateOffset(letter string, widest string) string {
+	offset := getOffset(letter, widest)
+	line := ""
+	for i := 0; i <= int(offset); i++ {
+		line += " "
+	}
+	return line
 }
 
 func generateLine(letter string) string {
